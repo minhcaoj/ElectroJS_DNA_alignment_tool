@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My DNA Alignment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center mb-8">My DNA Alignment</h1>
+        
+        <!-- Chọn file DNA -->
+        <div class="mb-6">
+            <label class="block text-lg font-medium mb-2">Chọn file DNA</label>
+            <input type="file" id="dnaFile" accept=".fasta,.fa,.pasta,.txt" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+        </div>
+        
+        <!-- 2 Textarea cho chuỗi DNA -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
+            <div>
+                <label class="block text-lg font-medium mb-2">Chuỗi DNA 1</label>
+                <textarea id="dna1" rows="5" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Dữ liệu từ file FASTA hoặc nhập tay"></textarea>
+            </div>
+            <div>
+                <label class="block text-lg font-medium mb-2">Chuỗi DNA 2</label>
+                <textarea id="dna2" rows="5" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Dữ liệu từ file FASTA hoặc nhập tay"></textarea>
+            </div>
+        </div>
+        
+        <!-- Inputs cho Match, Mismatch, Gap -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div>
+                <label class="block text-sm font-medium mb-1">Match</label>
+                <input type="number" id="match" value="1" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <p class="text-xs text-gray-500 mt-1">Điểm cho ký tự khớp (vd: 1)</p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Mismatch</label>
+                <input type="number" id="mismatch" value="-1" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <p class="text-xs text-gray-500 mt-1">Điểm cho ký tự không khớp (vd: -1)</p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Gap</label>
+                <input type="number" id="gap" value="-1" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <p class="text-xs text-gray-500 mt-1">Điểm phạt cho khoảng trống (vd: -1)</p>
+            </div>
+        </div>
+        
+        <!-- Nút Thực hiện Align -->
+        <div class="text-center mb-6">
+            <button id="alignBtn" disabled class="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-lg transition duration-300">Thực hiện Align</button>
+        </div>
+        
+        <!-- Textarea kết quả -->
+        <div class="mb-6">
+            <label class="block text-lg font-medium mb-2">Kết quả sắp hàng</label>
+            <div id="scoreDisplay" class="text-sm text-gray-600 mb-2"></div>
+            <textarea id="result" rows="10" class="w-full p-3 border border-gray-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" readonly placeholder="Kết quả sẽ hiển thị ở đây"></textarea>
+        </div>
+        
+        <!-- Nút Lưu file FASTA -->
+        <div class="text-center">
+            <button id="saveBtn" disabled class="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Lưu file FASTA</button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
