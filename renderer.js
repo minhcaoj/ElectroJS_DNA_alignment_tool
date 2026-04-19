@@ -104,7 +104,6 @@ alignBtn.addEventListener('click', async () => {
 saveBtn.addEventListener('click', async () => {
     const result = resultTextarea.value;
     if (!result) {
-        alert('Không có kết quả để lưu.');
         return;
     }
 
@@ -116,15 +115,12 @@ saveBtn.addEventListener('click', async () => {
     try {
         const response = await ipcRenderer.invoke('save-fasta-file', fastaContent);
         if (response.success) {
-            alert(`File đã được lưu thành công tại: ${response.filePath}`);
             saveBtn.disabled = true;
         } else {
-            alert('Lỗi khi lưu file: ' + response.error);
             saveBtn.disabled = false;
         }
     } catch (err) {
         console.error('Error:', err);
-        alert('Lỗi khi lưu file.');
         saveBtn.disabled = false;
     }
     saveBtn.textContent = 'Lưu file FASTA';
