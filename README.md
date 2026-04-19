@@ -3,7 +3,7 @@
 A simple, desktop-based Electron application that performs global DNA sequence alignment using the **Needleman-Wunsch algorithm**.
 
 ## Video demo
-
+https://youtu.be/1QMPI-ZS53s
 ## Features
 
 *   **File Input:** Load DNA sequences directly from `.fasta`, `.fa`, `.pasta`, or `.txt` files.
