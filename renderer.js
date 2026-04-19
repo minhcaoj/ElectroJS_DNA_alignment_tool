@@ -13,6 +13,7 @@ const alignBtn = document.getElementById('alignBtn');
 const resultTextarea = document.getElementById('result');
 const saveBtn = document.getElementById('saveBtn');
 const scoreDisplay = document.getElementById('scoreDisplay');
+const selectedFileName = document.getElementById('selectedFileName');
 
 function updateAlignButtonState() {
     const seq1 = dna1Textarea.value.replace(/\s/g, '');
@@ -26,17 +27,33 @@ updateAlignButtonState();
 
 // Đọc file FASTA trực tiếp trong renderer
 if (dnaFileInput) {
+    dnaFileInput.addEventListener('click', () => {
+        dnaFileInput.value = '';
+    });
+
     dnaFileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
         if (file) {
+            if (selectedFileName) {
+                selectedFileName.textContent = `Đã chọn: ${file.name}`;
+            }
+
             const filePath = file.path;
             fs.readFile(filePath, 'utf8', (err, data) => {
                 if (err) {
                     console.error('Error reading file:', err);
+                    if (selectedFileName) {
+                        selectedFileName.textContent = `Lỗi đọc file: ${file.name}`;
+                    }
                     return;
                 }
+
                 const sequences = parseFASTA(data);
                 console.log('Parsed sequences from file:', sequences);
+
+                dna1Textarea.value = '';
+                dna2Textarea.value = '';
+
                 if (sequences.length >= 1) {
                     dna1Textarea.value = sequences[0].sequence;
                 }
